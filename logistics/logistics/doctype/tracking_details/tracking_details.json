@@ -1,0 +1,80 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:ONEX-{#######}",
+ "creation": "2023-10-06 20:12:12.826018",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "customer",
+  "order_id",
+  "estimated_date",
+  "column_break_uzmpc",
+  "shipping_by",
+  "shipping_number",
+  "status"
+ ],
+ "fields": [
+  {
+   "fieldname": "order_id",
+   "fieldtype": "Link",
+   "label": "Order Id",
+   "options": "Create Shipment"
+  },
+  {
+   "fieldname": "estimated_date",
+   "fieldtype": "Date",
+   "label": "Estimated Date"
+  },
+  {
+   "fieldname": "shipping_by",
+   "fieldtype": "Data",
+   "label": "Shipping By"
+  },
+  {
+   "fieldname": "shipping_number",
+   "fieldtype": "Data",
+   "label": "Shipping Number"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "\nOrder Confirmed\nPicked by courier\nOn the way\nReady for pickup"
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Customer"
+  },
+  {
+   "fieldname": "column_break_uzmpc",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-10-06 20:16:52.535546",
+ "modified_by": "Administrator",
+ "module": "Logistics",
+ "name": "Tracking Details",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}
