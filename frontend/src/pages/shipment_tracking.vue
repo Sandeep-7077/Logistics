@@ -76,7 +76,6 @@ export default {
                                     }})
             this.trackingDetails = response.data.message
             this.showDetails = true;
-            console.log(this.trackingDetails['status']);
         },
     }
 }

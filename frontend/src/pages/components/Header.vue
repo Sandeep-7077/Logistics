@@ -57,12 +57,7 @@ export default{
         }
     },
     async created() {
-            const key = this.$cookies.get('sid');
             const user = this.$cookies.get('full_name');
-            const response = await axios.get('/api/resource/Customer/'+user, {
-                                    headers:{
-                                        Authorization: 'token ' + key
-                                    }})
             this.customer_name = user;
 		},
     methods:{

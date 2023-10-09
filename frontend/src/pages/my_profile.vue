@@ -28,7 +28,7 @@
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                     <div class="form-group">
                         <label for="fullName">Full Name</label>
-                        <input type="text" class="form-control" id="fullName" placeholder="Enter full name">
+                        <input type="text" class="form-control" id="fullName"  v-model="profileDetails.name" placeholder="Enter full name">
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
@@ -54,7 +54,7 @@
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                     <div class="form-group">
                         <label for="Street">Country</label>
-                        <input type="name" class="form-control" id="Street" placeholder="Enter Country">
+                        <input type="name" class="form-control" id="Street" v-model="profileDetails.name" placeholder="Enter Country">
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
@@ -99,6 +99,25 @@ export default {
         Header,
         Footer,
     },
+    data() {
+        return {
+            profileDetails: [],
+            full_name: '',
+        }
+    },
+    async created() {
+        const user = this.$cookies.get('full_name');
+            const key = this.$cookies.get('sid');
+            const response = await axios.get('/api/resource/Customer/'+user,{
+                                    headers:{
+                                        Authorization: 'token ' + key
+                                    }})
+            console.log(response.data.data);
+            this.profileDetails = response.data.data
+		},
+    methods: {
+        
+    }
 }
 </script>
 <style>

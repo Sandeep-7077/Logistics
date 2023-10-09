@@ -1,4 +1,4 @@
-<template>
+<template> 
 <section class="custom-header1 snipcss-PhDvQ">
     <div class="container">
         <div class="row">
@@ -11,11 +11,6 @@
             <div class="container track-container">
             <div class="row">
                 <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-md-6 col-sm-6 col-6 track-col">
-                <!-- <div class="search me-md-1">
-                    <i class="fa-solid fa-magnifying-glass">
-                    </i>P
-                    <input type="text" id="txtTrack" class="form-control" placeholder="Track Shipment" name="txtTrack" autocomplete="off">
-                </div> -->
                 </div>
                 <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-md-6 col-sm-6 col-6 customer-login">
                 <a href="/" class="customer-login">
@@ -30,7 +25,7 @@
 </section>
 
 <section class="login-wrapper snipcss-jrQas">
-    <div class="container">
+    <div class="container rounded-lg shadow-lg mt-5 mb-5 ">
         <div class="row">
         <div class="col-12">
             <div class="common-heading text-center mt-5">
@@ -50,7 +45,6 @@
             </div>
             <div class="col-md-6 mt-5">
                 <div class="login-right">
-                <fieldset>
                     <div class="login-box" style="padding:30px;">
                     <div class="input-cover mb-3">
                         <label>Email ID <span class="text-danger">*</span></label>
@@ -82,7 +76,6 @@
                     <div class="mt-3">
                     </div>
                     </div>
-                </fieldset>
                 </div>
             </div>
             </div>
