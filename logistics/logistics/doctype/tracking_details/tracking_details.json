@@ -41,7 +41,7 @@
    "fieldname": "status",
    "fieldtype": "Select",
    "label": "Status",
-   "options": "\nOrder Confirmed\nPicked by courier\nOn the way\nReady for pickup"
+   "options": "\nWaiting for Confirmation\nOrder Confirmed\nPicked by courier\nOn the way\nReady for pickup"
   },
   {
    "fieldname": "customer",
@@ -56,7 +56,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-06 20:16:52.535546",
+ "modified": "2023-10-09 12:59:25.671617",
  "modified_by": "Administrator",
  "module": "Logistics",
  "name": "Tracking Details",

@@ -1,40 +1,47 @@
 <template>
 <Header/>
 <div class="container py-5">
-    <h1 style="padding-left: 380px;padding-bottom: 20px;"><b></b>Raise Query</h1>
-    <form>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-            <label for="tracking">Tracking No.</label>
-            <input type="test" class="form-control" id="tracking" placeholder="Tracking Number" v-model="tracking">
+    <div class="text-center mb-5"> 
+        <h1><b>Raise Query</b></h1>
+    </div>
+    <div class="container rounded-lg shadow-lg p-5">
+        <form>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                <label for="tracking">Tracking No.</label>
+                <input type="test" class="form-control" id="tracking" placeholder="Tracking Number" v-model="tracking">
+                </div>
+                <div class="form-group col-md-6">
+                <label for="order">Order No.</label>
+                <input type="text" class="form-control" id="order" placeholder="Order Number" v-model="order">
+                </div>
             </div>
-            <div class="form-group col-md-6">
-            <label for="order">Order No.</label>
-            <input type="text" class="form-control" id="order" placeholder="Order Number" v-model="order">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputState">Select Category</label>
+                    <select id="inputState" class="form-control" v-model="category">
+                        <option selected>Choose...</option>
+                        <option v-for="category in category_list" :key="category">{{ category.name }}</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputState">Select Priority</label>
+                    <select id="inputState" class="form-control" v-model="priority">
+                        <option selected>Choose...</option>
+                        <option v-for="priority in priority_list" :key="priority">{{ priority.name }}</option>
+                    </select>
+                </div>
             </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="inputState">Select Category</label>
-                <select id="inputState" class="form-control" v-model="category">
-                    <option selected>Choose...</option>
-                    <option v-for="category in category_list" :key="category">{{ category.name }}</option>
-                </select>
+            <div class="form-group">
+                <label for="inputAddress">Your Complain/Remarks Here</label>
+                <textarea type="text" class="form-control" id="inputAddress" placeholder="comment" v-model="remarks"></textarea>
             </div>
-            <div class="form-group col-md-6">
-                <label for="inputState">Select Priority</label>
-                <select id="inputState" class="form-control" v-model="priority">
-                    <option selected>Choose...</option>
-                    <option v-for="priority in priority_list" :key="priority">{{ priority.name }}</option>
-                </select>
+            <div class="text-center"> 
+                <button type="submit" v-on:click="postissue()" class="btn btn-danger col-4 rounded-pill">Save</button>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="inputAddress">Your Complain/Remarks Here</label>
-            <textarea type="text" class="form-control" id="inputAddress" placeholder="comment" v-model="remarks"></textarea>
-        </div>
-        <button type="submit" v-on:click="postissue()" class="btn btn-primary col-3">Save</button>
-    </form>
+            
+        </form>
+    </div>
 </div>
 <Footer/>
 </template>

@@ -27,6 +27,11 @@ const routes = [
     name: 'ShipmentTracking',
     component: () => import('@/pages/shipment_tracking.vue'),
   },
+  {
+    path: '/my_profile',
+    name: 'MyProfile',
+    component: () => import('@/pages/my_profile.vue'),
+  },
 ]
 
 let router = createRouter({

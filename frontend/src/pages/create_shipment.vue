@@ -1,19 +1,22 @@
 <template>
 <Header/>
 <div class="container py-5">
-    <h1 style="padding-left: 380px;padding-bottom: 20px;"><b></b>Create Shipment</h1>
+    <div class="text-center mb-5"> 
+        <h1><b>Create Shipment</b></h1>
+    </div>
+    <div class="container">
     <div class="row">
-    <div class="col-lg-8 mx-auto">
+    <div class="col-lg-12 mx-auto">
     <div class="bg-white rounded-lg shadow-lg p-5">
         <!-- Credit card form tabs -->
         <ul role="tablist" class="nav bg-light nav-pills rounded-pill nav-fill mb-3">
             <li class="nav-item">
-            <a href="#nav-tab-export" class="nav-link  rounded-pill" @click="changeTab('nav-tab-export')" :class="{ 'active': activeTab === 'nav-tab-export' }">
+            <a href="#nav-tab-export" class="nav-link rounded-pill" @click="changeTab('nav-tab-export')" :class="{ 'active bg-danger': activeTab === 'nav-tab-export' , 'link-danger': activeTab === 'nav-tab-import' }">
                 <i class="fa fa-credit-card"></i> Export
             </a>
             </li>
             <li class="nav-item">
-            <a href="#nav-tab-import" class="nav-link  rounded-pill" @click="changeTab('nav-tab-import')" :class="{ 'active': activeTab === 'nav-tab-import' }">
+            <a href="#nav-tab-import" class="nav-link rounded-pill" @click="changeTab('nav-tab-import')" :class="{ 'active bg-danger': activeTab === 'nav-tab-import', 'link-danger': activeTab === 'nav-tab-export' }">
                 <i class="fa fa-paypal"></i> Import
             </a>
             </li>
@@ -29,8 +32,7 @@
                     <div class="col-sm-4">
                     <div class="form-group mb-4">
                         <label data-toggle="tooltip" title="Three-digits code on the back of your card">Origin(UAE Only)<i class="bi bi-asterisk" style="color:red;font-size: 7px;"></i></label>
-                        <input type="text" required class="form-control" v-model="origin_uae" >
-                        <!-- <input type="text" required class="form-control" v-model="origin_uae" @input="searchPlace('origin')"> -->
+                        <input id="origin" type="text" required class="form-control" v-model="origin_uae"  @input="updateOrigin" >
                     </div>
                     </div>
                     <div class="col-sm-4">
@@ -42,8 +44,7 @@
                     <div class="col-sm-4">
                     <div class="form-group mb-4">
                         <label data-toggle="tooltip" title="Three-digits code on the back of your card">Destination<i class="bi bi-asterisk" style="color:red;font-size: 7px;"></i></label>
-                        <input type="text" required class="form-control" v-model="destination">
-                        <!-- <input type="text" required class="form-control" v-model="destination" @input="searchPlace('destination')"> -->
+                        <input id="destination" type="text" required class="form-control" v-model="destination" @input="updateDestination">
                     </div>
                     </div>
                     <div class="col-sm-4">
@@ -84,7 +85,9 @@
                     </div>
                     </div>
                 </div>
-                <button type="button" v-on:click="getquote()" class="subscribe btn btn-primary btn-block rounded-pill shadow-sm"> GET QUOTE  </button>
+                <div class="text-center"> 
+                    <button type="button" v-on:click="getquote()" class="subscribe btn btn-danger col-4 rounded-pill shadow-sm"> GET QUOTE  </button>
+                </div>
             </form>
             </div>
             <!-- End -->
@@ -139,7 +142,9 @@
                     </div>
                     </div>
                 </div>
-                <button type="button" v-on:click="getquote()" class="subscribe btn btn-primary btn-block rounded-pill shadow-sm"> GET QUOTE  </button>
+                <div class="text-center"> 
+                    <button type="button" class="subscribe btn btn-danger col-4 rounded-pill shadow-sm"> GET QUOTE  </button>
+                </div>            
             </form>
             </div>
             <!-- End -->
@@ -150,86 +155,127 @@
     </div>
     </div>
 </div>
+</div>
 <Footer/>
 </template>
 <script>
 import Header from '/src/pages/components/Header.vue';
 import Footer from '/src/pages/components/Footer.vue';
 import axios from 'axios';
-// import { gmapApi } from 'vue2-google-maps';
-
 export default {
     components: {
         Header,
-        Footer
+        Footer,
     },
     data() {
         return {
-            origin_uae:'',
-            origin_city:'',
-            destination:'',
-            destination_pincode:'',
-            destination_city:'',
-            shipment_type:'',
-            total_pieces:'',
-            weight:'',
-             activeTab: 'nav-tab-export', // Set the initial active tab
+        origin_uae: "",
+        origin_city: "",
+        destination: "",
+        destination_pincode: "",
+        destination_city: "",
+        shipment_type: "",
+        total_pieces: "",
+        weight: "",
+        activeTab: "nav-tab-export",
         };
     },
     methods: {
-        // searchPlace(type) {
-        //     const inputField = type === 'origin' ? this.origin : this.destination;
+        async loadGoogleMapsAPI() {
+            const googleMapsApiKey = "AIzaSyD364zQNQWLRtQyqslftm3bFlo1SxsVbCk"; // Replace with your API key
+            const script = document.createElement("script");
+            script.src = `https://maps.googleapis.com/maps/api/js?key=${googleMapsApiKey}&libraries=places`;
+            script.async = true;
+            script.defer = true;
+            document.head.appendChild(script);
 
-        //     if (inputField && this.autocompleteService) {
-        //         this.autocompleteService.getPlacePredictions(
-        //         { input: inputField },
-        //         (predictions, status) => {
-        //             if (status === 'OK') {
-        //             if (type === 'origin') {
-        //                 // Handle origin predictions
-        //                 // You may want to display the predictions in a dropdown or list
-        //             } else if (type === 'destination') {
-        //                 // Handle destination predictions
-        //                 // You may want to display the predictions in a dropdown or list
-        //             }
-        //             }
-        //         }
-        //         );
-        //     }
-        //     },
-        async getquote() {
-            const values={
-                origin_uae:this.origin_uae,
-                origin_city:this.origin_city,
-                destination:this.destination,
-                destination_pincode:this.destination_pincode,
-                destination_city:this.destination_city,
-                shipment_type:this.shipment_type,
-                total_pieces:this.total_pieces,
-                weight:this.weight,
+            return new Promise((resolve) => {
+                script.onload = () => {
+                resolve();
                 };
-                const key = this.$cookies.get('sid');
-                const response = await axios.post("/api/method/logistics.api.create_shipment",{data:values},{
-                    headers:{
-                        Authorization: 'token'+ key
-                    }
-                })
-                if(response.status == 200) {
-                    this.$router.push({name:"Home"});
-                }
+            });
         },
+        async updateOrigin() {
+            await this.loadGoogleMapsAPI();
+
+            var origin = new google.maps.places.Autocomplete(
+                document.getElementById("origin")
+            );
+            origin.setComponentRestrictions({
+                country: ["sa"],
+            });
+            origin.addListener("place_changed", () => {
+                var place = origin.getPlace();
+
+                if (place.address_components) {
+                this.origin_uae = place.formatted_address;
+                this.origin_city = "";
+
+                place.address_components.forEach((component) => {
+                    if (component.types.includes("locality")) {
+                    this.origin_city = component.long_name;
+                    }
+                });
+                }
+            });
+        },
+        async updateDestination() {
+            await this.loadGoogleMapsAPI();
+
+            var destination = new google.maps.places.Autocomplete(
+                document.getElementById("destination")
+            );
+
+            destination.addListener("place_changed", () => {
+                var place = destination.getPlace();
+
+                if (place.address_components) {
+                this.destination = place.formatted_address;
+                this.destination_pincode = "";
+                this.destination_city = "";
+
+                place.address_components.forEach((component) => {
+                    if (component.types.includes("postal_code")) {
+                    this.destination_pincode = component.long_name;
+                    } else if (component.types.includes("locality")) {
+                    this.destination_city = component.long_name;
+                    }
+                });
+                }
+            });
+        },
+        async getquote() {
+            const values = {
+                origin_uae: this.origin_uae,
+                origin_city: this.origin_city,
+                destination: this.destination,
+                destination_pincode: this.destination_pincode,
+                destination_city: this.destination_city,
+                shipment_type: this.shipment_type,
+                total_pieces: this.total_pieces,
+                weight: this.weight,
+            };
+            const key = this.$cookies.get("sid");
+            const response = await axios.post(
+                "/api/method/logistics.api.create_shipment",
+                { data: values },
+                {
+                headers: {
+                    Authorization: "token" + key,
+                },
+                }
+            );
+            if (response.status == 200) {
+                this.$router.push({ name: "Home" });
+            }
+            },
         changeTab(tabId) {
-            console.log("changed");
-        this.activeTab = tabId; // Update the activeTab data property
+            this.activeTab = tabId;
         },
     },
-    // mounted() {
-    //     // this.autocompleteService = new gmapApi.places.AutocompleteService();
-    // },
+    mounted() {
+        this.updateOrigin();
+        this.updateDestination();
+    },
 };
 </script>
-<style>
-.black-background {
-  background-color: rgb(236, 235, 233); /* Add the background color here */
-}
-</style>

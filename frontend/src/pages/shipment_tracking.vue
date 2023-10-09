@@ -1,8 +1,10 @@
 <template>
     <Header />
     <div class="container py-5">
-        <div class="container">
-            <h1 style="padding-left: 380px;padding-bottom: 20px;"><b></b>Shipment Tracking</h1>
+        <div class="text-center mb-5"> 
+                <h1><b>Shipment Tracking</b></h1>
+        </div>
+        <div class="container rounded-lg shadow-lg p-5">
                 <div class="row mb-3">
                     <label for="inputEmail3" class="col-sm-3 col-form-label">Track Your Shipment</label>
                     <div class="col-sm-9">
@@ -10,32 +12,36 @@
                     </div>
                 </div>
                 <div class="text-center"> 
-                    <button type="submit" v-on:click="fetchDetails()" class="btn btn-primary col-4">TRACK NOW</button>
+                    <button type="submit" v-on:click="fetchDetails()" class="btn btn-danger col-4 rounded-pill ">TRACK NOW</button>
                 </div>
         </div>
-        <div class="container" v-if="showDetails">
+        <div class="container rounded-lg shadow-lg p-5" v-if="showDetails">
             <article class="card">
                 <header class="card-header"> My Orders / Tracking </header>
                 <div class="card-body">
-                    <h6>Order ID: {{ trackingDetails.order_id }}</h6>
+                    <h6>Order ID: {{ trackingDetails['order_id'] }}</h6>
                     <article class="card">
                         <div class="card-body row">
                             <div class="col"> <strong>Estimated Delivery Date:</strong> <br>{{ trackingDetails['estimated_date'] }} </div>
                             <div class="col"> <strong>Shipping BY:</strong> <br> {{ trackingDetails['shipping_by'] }}, | <i class="fa fa-phone"></i>
                                 {{ trackingDetails.shipping_number }}</div>
-                            <div class="col"> <strong>Status:</strong> <br> P{{ trackingDetails['status'] }}} </div>
+                            <div class="col"> <strong>Status:</strong> <br> {{ trackingDetails['status'] }} </div>
                             <div class="col"> <strong>Tracking #:</strong> <br> {{ trackingDetails['name'] }} </div>
                         </div>
                     </article>
                     <div class="track">
-                        <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span
-                                class="text">Order confirmed</span> </div>
-                        <div class="step active"> <span class="icon"> <i class="fa fa-user"></i> </span> <span class="text">
-                                Picked by courier</span> </div>
-                        <div class="step"> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> On
-                                the way </span> </div>
-                        <div class="step"> <span class="icon"> <i class="fa fa-box"></i> </span> <span class="text">Ready
-                                for pickup</span> </div>
+                        <div class="step" :class="{'active': trackingDetails['status'] == 'Order Confirmed' || trackingDetails['status'] == 'Picked by courier' || trackingDetails['status'] == 'On the way' || trackingDetails['status'] == 'Ready for pickup'}"> <span class="icon"> <i class="bi bi-bag-check"></i> </span> 
+                            <span class="text">Order confirmed</span> 
+                        </div>
+                        <div class="step" :class="{'active': trackingDetails['status'] == 'Picked by courier' || trackingDetails['status'] == 'On the way' || trackingDetails['status'] == 'Ready for pickup'}"> <span class="icon"> <i class="bi bi-person-check"></i> </span> 
+                            <span class="text">Picked by courier</span> 
+                        </div>
+                        <div class="step" :class="{'active': trackingDetails['status'] == 'On the way' || trackingDetails['status'] == 'Ready for pickup'}"> <span class="icon"> <i class="bi bi-truck"></i> </span> 
+                            <span class="text">On the way</span> 
+                        </div>
+                        <div class="step" :class="{'active': trackingDetails['status'] == 'Ready for pickup'}"> <span class="icon"> <i class="bi bi-box-seam"></i> </span> 
+                            <span class="text">Ready for pickup</span> 
+                        </div>
                     </div>
                     <hr>
                 </div>
@@ -68,9 +74,9 @@ export default {
                                     headers:{
                                         Authorization: 'token ' + key
                                     }})
-            // console.log(response.data.message);
-            this.tracking = response.data.message
+            this.trackingDetails = response.data.message
             this.showDetails = true;
+            console.log(this.trackingDetails['status']);
         },
     }
 }
