@@ -6,4 +6,4 @@ Logistic
 
 MIT
 
-### Create User and Customer with Same Name ###
+### Create User Only ###
