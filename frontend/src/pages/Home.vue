@@ -22,7 +22,7 @@
 <section>
   <div class="container mb-5">
     <div class="row display mb-5">
-      <div class="col-lg-4 col-md-6 col-sm-12 mt-3">
+      <div class="col-lg-4 col-md-6 col-sm-12 mt-5">
         <router-link :to="`/create_shipment`" style="text-decoration: none; color: inherit;">
           <div class="why-choose-us-box">
             <div class="row">
@@ -36,7 +36,7 @@
           </div>
         </router-link>
       </div>
-      <div class="col-lg-4 col-md-6 col-sm-12 mt-3">
+      <div class="col-lg-4 col-md-6 col-sm-12 mt-5">
         <router-link :to="`/shipment_tracking`" style="text-decoration: none; color: inherit;">
           <div class="why-choose-us-box">
             <div class="row">
@@ -50,7 +50,7 @@
           </div>
         </router-link>
       </div>
-      <div class="col-lg-4 col-md-6 col-sm-12 mt-3">
+      <div class="col-lg-4 col-md-6 col-sm-12 mt-5">
         <div class="why-choose-us-box">
           <div class="row">
             <div class="col-3">
@@ -62,7 +62,7 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-4 col-md-6 col-sm-12 mt-3">
+      <div class="col-lg-4 col-md-6 col-sm-12 mt-5">
         <router-link :to="`/my_profile`" style="text-decoration: none; color: inherit;">
         <div class="why-choose-us-box">
           <div class="row">
@@ -76,7 +76,7 @@
         </div>
       </router-link>
       </div>
-      <div class="col-lg-4 col-md-6 col-sm-12 mt-3">
+      <div class="col-lg-4 col-md-6 col-sm-12 mt-5">
         <router-link :to="`/raise_query`" style="text-decoration: none; color: inherit;">
           <div class="why-choose-us-box">
             <div class="row">
@@ -90,7 +90,7 @@
           </div>
         </router-link>
       </div>
-      <div class="col-lg-4 col-md-6 col-sm-12 mt-3">
+      <div class="col-lg-4 col-md-6 col-sm-12 mt-5">
         <div class="why-choose-us-box">
           <div class="row">
             <div class="col-3">
@@ -102,7 +102,7 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-4 col-md-6 col-sm-12 mt-3">
+      <div class="col-lg-4 col-md-6 col-sm-12 mt-5">
         <div class="why-choose-us-box">
           <div class="row">
             <div class="col-3">
@@ -114,7 +114,7 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-4 col-md-6 col-sm-12 mt-3">
+      <div class="col-lg-4 col-md-6 col-sm-12 mt-5">
         <div class="why-choose-us-box">
           <div class="row">
             <div class="col-3">
@@ -126,7 +126,7 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-4 col-md-6 col-sm-12 mt-3">
+      <div class="col-lg-4 col-md-6 col-sm-12 mt-5">
         <div class="why-choose-us-box">
           <div class="row">
             <div class="col-3">
@@ -138,7 +138,7 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-4 col-md-6 col-sm-12 mt-3">
+      <div class="col-lg-4 col-md-6 col-sm-12 mt-5">
         <div class="why-choose-us-box">
           <div class="row">
             <div class="col-3">
@@ -150,7 +150,7 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-4 col-md-6 col-sm-12 mt-3">
+      <div class="col-lg-4 col-md-6 col-sm-12 mt-5">
         <div class="why-choose-us-box">
           <div class="row">
             <div class="col-3">
@@ -162,7 +162,7 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-4 col-md-6 col-sm-12 mt-3">
+      <div class="col-lg-4 col-md-6 col-sm-12 mt-5">
         <div class="why-choose-us-box">
           <div class="row">
             <div class="col-3">
@@ -174,7 +174,7 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-4 col-md-6 col-sm-12 mt-3">
+      <div class="col-lg-4 col-md-6 col-sm-12 mt-5">
         <div class="why-choose-us-box">
           <div class="row">
             <div class="col-3">
@@ -186,7 +186,7 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-4 col-md-6 col-sm-12 mt-3">
+      <div class="col-lg-4 col-md-6 col-sm-12 mt-5">
         <div class="why-choose-us-box">
           <div class="row">
             <div class="col-3">
@@ -198,7 +198,7 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-4 col-md-6 col-sm-12 mt-3">
+      <div class="col-lg-4 col-md-6 col-sm-12 mt-5">
         <div class="why-choose-us-box">
           <div class="row">
             <div class="col-3">

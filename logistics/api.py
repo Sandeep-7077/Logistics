@@ -1,4 +1,5 @@
 import frappe
+from frappe import _
 from datetime import date
 import requests
 import json
@@ -88,5 +89,44 @@ def tracking_details(data):
         details = frappe.get_doc("Tracking Details", existing_details)
     else:
         details = frappe.get_doc("Tracking Details", data["value"])
-    
     return details
+
+@frappe.whitelist()
+def on_create(self, method):
+    customer = frappe.db.get_value("Customer", {'customer_name': self.full_name})
+    if customer:
+        existing_account = frappe.get_doc("Customer", customer)
+        existing_account.update(
+            {
+                "customer_name":self.full_name,
+                "customer_type":'Individual',
+                "customer_group":'Individual',
+                "territory":'India',
+            }
+        )
+        existing_account.save()
+        existing_profile = frappe.get_doc("Profile", customer)
+        existing_profile.update(
+            {
+                "full_name":self.full_name,
+                "email":self.email,
+                "phone":self.phone
+            }
+        )
+        existing_profile.save()
+    else:
+        doc = frappe.get_doc({
+                "doctype": "Customer",
+                "customer_name":self.full_name,
+                "customer_type":'Individual',
+                "customer_group":'Individual',
+                "territory":'India',
+            })
+        doc.insert(ignore_permissions=True)
+        profile = frappe.get_doc({
+                "doctype": "Profile",
+                "full_name":self.full_name,
+                "email":self.email,
+                "phone":self.phone
+            })
+        profile.insert(ignore_permissions=True)

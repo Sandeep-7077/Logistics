@@ -62,12 +62,10 @@ export default{
 		},
     methods:{
         async logout(){
+            this.$router.push({name:"Login"});
+            localStorage.removeItem('token');
 			axios
 				.post("/api/method/logistics.api.logout")
-				.then((response) => {
-						this.$router.push({name:"Login"});
-				})
-				
 		},
     },
 };

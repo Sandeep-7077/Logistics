@@ -2,7 +2,7 @@
 <Header />
 <div class="container my-5">
     <div class="text-center mb-5"> 
-        <h1><b>Raise Query</b></h1>
+        <h1><b>My Profile</b></h1>
     </div>
     <div class="row gutters">
     <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 rounded-lg shadow-lg">
@@ -28,25 +28,25 @@
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                     <div class="form-group">
                         <label for="fullName">Full Name</label>
-                        <input type="text" class="form-control" id="fullName"  v-model="profileDetails.name" placeholder="Enter full name">
+                        <input type="text" class="form-control" id="fullName"  v-model="profileDetails.name" placeholder="Enter full name" readonly>
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                     <div class="form-group">
                         <label for="eMail">Email</label>
-                        <input type="email" class="form-control" id="eMail" placeholder="Enter email ID">
+                        <input type="email" class="form-control" id="eMail" v-model="profileDetails.email" placeholder="Enter email ID">
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                     <div class="form-group">
                         <label for="phone">Phone</label>
-                        <input type="text" class="form-control" id="phone" placeholder="Enter phone number">
+                        <input type="text" class="form-control" id="phone" v-model="profileDetails.phone" placeholder="Enter phone number">
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                     <div class="form-group">
                         <label for="website">Address</label>
-                        <input type="url" class="form-control" id="website" placeholder="Address">
+                        <input type="url" class="form-control" id="website" v-model="profileDetails.address" placeholder="Address">
                     </div>
                 </div>
             </div>
@@ -54,32 +54,32 @@
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                     <div class="form-group">
                         <label for="Street">Country</label>
-                        <input type="name" class="form-control" id="Street" v-model="profileDetails.name" placeholder="Enter Country">
+                        <input type="name" class="form-control" id="Street" v-model="profileDetails.country" placeholder="Enter Country">
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                     <div class="form-group">
                         <label for="ciTy">City</label>
-                        <input type="name" class="form-control" id="ciTy" placeholder="Enter City">
+                        <input type="name" class="form-control" id="ciTy" v-model="profileDetails.city" placeholder="Enter City">
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                     <div class="form-group">
                         <label for="sTate">State</label>
-                        <input type="text" class="form-control" id="sTate" placeholder="Enter State">
+                        <input type="text" class="form-control" id="sTate" v-model="profileDetails.state" placeholder="Enter State">
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                     <div class="form-group">
                         <label for="zIp">Pin Code</label>
-                        <input type="text" class="form-control" id="zIp" placeholder="Pin Code">
+                        <input type="text" class="form-control" id="zIp" v-model="profileDetails.pin_code" placeholder="Pin Code">
                     </div>
                 </div>
             </div>
             <div class="row gutters">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div class="text-right">
-                        <button type="button" id="submit" name="submit" class="btn btn-success rounded-pill col-4">Save</button>
+                        <button type="button" v-on:click="update()" name="submit" class="btn btn-success rounded-pill col-4">Update</button>
                     </div>
                 </div>
             </div>
@@ -107,16 +107,36 @@ export default {
     },
     async created() {
         const user = this.$cookies.get('full_name');
-            const key = this.$cookies.get('sid');
-            const response = await axios.get('/api/resource/Customer/'+user,{
-                                    headers:{
-                                        Authorization: 'token ' + key
-                                    }})
-            console.log(response.data.data);
-            this.profileDetails = response.data.data
+        const key = this.$cookies.get('sid');
+        const response = await axios.get("/api/resource/Profile/"+user,{
+                                headers:{
+                                    Authorization: 'token ' + key
+                                }})
+        console.log(response.data);
+        this.profileDetails = response.data.data
 		},
     methods: {
-        
+        async update() {
+            const values={
+                email:this.profileDetails.email,
+                phone:this.profileDetails.phone ,
+                address:this.profileDetails.address ,
+                country:this.profileDetails.country ,
+                city:this.profileDetails.city ,
+                state:this.profileDetails.state ,
+                pin_code:this.profileDetails.pin_code ,
+                };
+                const user = this.$cookies.get('full_name');
+                const key = this.$cookies.get('sid');
+                const res = await axios.put("/api/resource/Profile/"+user,{data:values},{
+                        headers:{
+                            Authorization: 'token'+ key
+                        }
+                    })
+                if(res.status == 200) {
+                    this.$router.push({name:"Home"});
+                }
+        },
     }
 }
 </script>

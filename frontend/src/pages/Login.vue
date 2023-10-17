@@ -1,4 +1,5 @@
 <template> 
+
 <section class="custom-header1 snipcss-PhDvQ">
     <div class="container">
         <div class="row">
@@ -48,12 +49,12 @@
                     <div class="login-box" style="padding:30px;">
                     <div class="input-cover mb-3">
                         <label>Email ID <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" placeholder="Email ID" name="txtEmail" id="txtEmail" maxlength="100" v-model="email" autocomplete="off">
+                        <input type="text" class="form-control" placeholder="Email ID" maxlength="100" v-model="email" autocomplete="off">
                     </div>
                     <div class="input-cover mb-3">
                         <label>Password <span class="text-danger">*</span></label>
-                        <input type="password" class="form-control" placeholder="Password" name="txtPassword" id="txtPassword" maxlength="100" v-model="password">
-                        <i class="fa fa-eye" aria-hidden="true" onclick="myFunction()"></i>
+                        <input :type="showPassword ? 'text' : 'password'" class="form-control" placeholder="Password" maxlength="100" v-model="password" >
+                        <i class="bi bi-eye" @click="togglePasswordVisibility"></i>
                     </div>
                     <div class="col-12 style-KW126" id="ErrorMsg">
                         <div class="alert alert-danger" role="alert">
@@ -97,6 +98,7 @@ export default{
 		return{
 			email:"",
 			password:"",
+            showPassword: false,
 			};
 	},
 	methods:{
@@ -105,13 +107,18 @@ export default{
 				.post("/api/method/logistics.api.login",{usr:this.email,pwd:this.password,})
 				.then((response) => {
 					if(response.data.message.success_key != 0){
+                        localStorage.setItem( 'token', JSON.stringify(response.data.message.sid) );
 						this.$router.push({name:"Home"});
+                        // console.log(response.data.message.sid)
 					}else{
 						alert("Login Credentials do not match.");
 					}
 				})
-				.catch((response) => { alert(response.data.message.message);})
+				.catch((response) => { alert("You don't have permission to access.Please contact Admin");})
 		},
+        togglePasswordVisibility() {
+        this.showPassword = !this.showPassword;
+        },
 	},
 };
 </script>
