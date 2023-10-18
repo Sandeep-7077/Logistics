@@ -130,7 +130,7 @@
         <div class="why-choose-us-box">
           <div class="row">
             <div class="col-3">
-              <img src="/src/assets/images/icons/4.png" style="width:50px;margin-left: 15px;">
+              <img src="/src/assets/images/icons/9.png" style="width:50px;margin-left: 15px;">
             </div>
             <div class="col-8 justify-content-start">
               <p class="mr-5 pr-4" style="color: black; font-size: 15px;">Outstanding Amount</p>
@@ -142,7 +142,7 @@
         <div class="why-choose-us-box">
           <div class="row">
             <div class="col-3">
-              <img src="/src/assets/images/icons/4.png" style="width:50px;margin-left: 15px;">
+              <img src="/src/assets/images/icons/10.png" style="width:50px;margin-left: 15px;">
             </div>
             <div class="col-8 justify-content-start">
               <p class="mr-5 pr-4" style="color: black; font-size: 15px;">Ledger Detail</p>
@@ -154,7 +154,7 @@
         <div class="why-choose-us-box">
           <div class="row">
             <div class="col-3">
-              <img src="/src/assets/images/icons/4.png" style="width:50px;margin-left: 15px;">
+              <img src="/src/assets/images/icons/11.png" style="width:50px;margin-left: 15px;">
             </div>
             <div class="col-8 justify-content-start">
               <p class="mr-5 pr-4" style="color: black; font-size: 15px;">My Invoice</p>
@@ -166,7 +166,7 @@
         <div class="why-choose-us-box">
           <div class="row">
             <div class="col-3">
-              <img src="/src/assets/images/icons/4.png" style="width:50px;margin-left: 15px;">
+              <img src="/src/assets/images/icons/12.png" style="width:50px;margin-left: 15px;">
             </div>
             <div class="col-8 justify-content-start">
               <p class="mr-5 pr-4" style="color: black; font-size: 15px;">Schedule Pickup</p>
@@ -178,7 +178,7 @@
         <div class="why-choose-us-box">
           <div class="row">
             <div class="col-3">
-              <img src="/src/assets/images/icons/4.png" style="width:50px;margin-left: 15px;">
+              <img src="/src/assets/images/icons/13.png" style="width:50px;margin-left: 15px;">
             </div>
             <div class="col-8 justify-content-start">
               <p class="mr-5 pr-4" style="color: black; font-size: 15px;">Cancel Pickup</p>
@@ -190,7 +190,7 @@
         <div class="why-choose-us-box">
           <div class="row">
             <div class="col-3">
-              <img src="/src/assets/images/icons/4.png" style="width:50px;margin-left: 15px;">
+              <img src="/src/assets/images/icons/14.png" style="width:50px;margin-left: 15px;">
             </div>
             <div class="col-8 justify-content-start">
               <p class="mr-5 pr-4" style="color: black; font-size: 15px;">Reschedule Pickup</p>
@@ -202,7 +202,7 @@
         <div class="why-choose-us-box">
           <div class="row">
             <div class="col-3">
-              <img src="/src/assets/images/icons/4.png" style="width:50px;margin-left: 15px;">
+              <img src="/src/assets/images/icons/15.png" style="width:50px;margin-left: 15px;">
             </div>
             <div class="col-8 justify-content-start">
               <p class="mr-5 pr-4" style="color: black; font-size: 15px;">Download Forms</p>

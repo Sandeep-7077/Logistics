@@ -23,7 +23,7 @@
                     <article class="card">
                         <div class="card-body row">
                             <div class="col"> <strong>Estimated Delivery Date:</strong> <br>{{ trackingDetails['estimated_date'] }} </div>
-                            <div class="col"> <strong>Shipping BY:</strong> <br> {{ trackingDetails['shipping_by'] }}, | <i class="fa fa-phone"></i>
+                            <div class="col"> <strong>Shipping By:</strong> <br> {{ trackingDetails['shipping_by'] }} | <i class="bi bi-telephone"></i>
                                 {{ trackingDetails.shipping_number }}</div>
                             <div class="col"> <strong>Status:</strong> <br> {{ trackingDetails['status'] }} </div>
                             <div class="col"> <strong>Tracking #:</strong> <br> {{ trackingDetails['name'] }} </div>
@@ -142,7 +142,7 @@ body {
 }
 
 .track .step.active:before {
-    background: #FF5722
+    background: #dc3545;
 }
 
 .track .step::before {
@@ -155,7 +155,7 @@ body {
 }
 
 .track .step.active .icon {
-    background: #ee5435;
+    background:#dc3545;
     color: #fff
 }
 
