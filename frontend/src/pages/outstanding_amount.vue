@@ -1,46 +1,50 @@
 <template>
 <Header/>
-<div class="container py-5">
+<div class="container pb-5">
     <div class="text-center mb-5"> 
-        <h1><b>Raise Query</b></h1>
+        <h1><b>Outstanding Amount</b></h1>
     </div>
-    <div class="container rounded-lg shadow-lg p-5">
-        <form @submit.prevent="postissue">
+    <div class="container rounded-lg shadow-lg p-4 mb-3">
+        <form @submit.prevent="__">
             <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="tracking">Tracking No.</label>
-                    <input type="test" required class="form-control" id="tracking" placeholder="Tracking Number" v-model="tracking">
+                <div class="form-group col-md-4">
+                    <label for="tracking">Date From</label>
+                    <input type="date" required class="form-control" v-model="dt_from">
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
+                    <label for="order">Date To</label>
+                    <input type="date" required class="form-control" v-model="dt_to">
+                </div>
+                <div class="form-group col-md-4">
                     <label for="order">Order No.</label>
-                    <input type="text" required class="form-control" id="order" placeholder="Order Number" v-model="order">
+                    <input type="text" required class="form-control" placeholder="Order Number" v-model="order">
                 </div>
             </div>
             <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="inputState">Select Category</label>
-                    <select required class="form-control" v-model="category">
-                        <option value="">Select</option>
-                        <option v-for="category in category_list" :key="category">{{ category.name }}</option>
-                    </select>
+                <div class="form-group col-md-4">
+                    <label for="order">Tracking No.</label>
+                    <input type="text" required class="form-control" placeholder="Tracking Number" v-model="tracking">
                 </div>
-                <div class="form-group col-md-6">
-                    <label for="inputState">Select Priority</label>
-                    <select required class="form-control" v-model="priority">
-                        <option value="">Select</option>
-                        <option v-for="priority in priority_list" :key="priority">{{ priority.name }}</option>
-                    </select>
+                <div class="form-group col-md-4">
+                    <label for="order">Invoice No.</label>
+                    <input type="text" required class="form-control" placeholder="Invoice Number" v-model="invoice">
+                </div>
+                <div class="col-md-4" style="margin-top: 35px;"> 
+                    <button type="submit" class="btn btn-danger col-5 ml-2 rounded-pill">Search</button>
+                    <button type="submit" class="btn btn-success col-5 ml-2 rounded-pill">Export</button>
                 </div>
             </div>
-            <div class="form-group">
-                <label for="inputAddress">Your Complain/Remarks Here</label>
-                <textarea type="text" required class="form-control" id="inputAddress" placeholder="comment" v-model="remarks"></textarea>
-            </div>
-            <div class="text-center"> 
-                <button type="submit" class="btn btn-danger col-4 rounded-pill">Save</button>
-            </div>
-            
         </form>
+    </div>
+    <div class="rounded-lg shadow-lg p-3">
+        <div class="row note m-1">
+            <div class="col-8">
+                <h6>Outstanding Amount : AED 0</h6>
+            </div>
+            <div class="col-4 text-right">
+                <h6>No Record Found!!!</h6>
+            </div>
+        </div>
     </div>
 </div>
 <Footer/>
@@ -78,18 +82,19 @@ export default {
                                     }})
             this.priority_list = response.data.data;
             this.category_list = response2.data.data;
-		},
+        },
     methods: {
         async postissue() {
             const values={
-                subject:this.order ,
-                issue_type:this.category ,
+                tracking:this.tracking ,
+                order:this.order ,
+                category:this.category ,
                 priority:this.priority ,
-                description:"("+this.tracking+ ")" +this.remarks,
+                remarks:this.remarks ,
                 };
                 const key = this.$cookies.get('sid');
                 const response = await axios
-                .post("/api/resource/Issue",{data:values},{
+                .post("/api/method/logistics.api.raise_query",{data:values},{
                         headers:{
                             Authorization: 'token'+ key
                         }})

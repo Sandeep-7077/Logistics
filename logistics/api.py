@@ -55,42 +55,6 @@ def logout():
         frappe.session.sid = ""
     frappe.local.cookie_manager.delete_cookie(["full_name", "user_id", "sid", "user_image", "system_user"])
 
-
-@frappe.whitelist()
-def create_shipment(data):
-    Shipment = frappe.get_doc({
-                "doctype": "Create Shipment",
-                "originuae":data['origin_uae'],
-                "origin_city":data['origin_city'],
-                "destination":data['destination'],
-                "destination_pincode":data['destination_pincode'],
-                "destination_city":data['destination_city'],
-                "shipment_type":data['shipment_type'],
-                "total_pieces":data['total_pieces'],
-                "parcel_weight":data['weight'],
-            })
-    Shipment.insert(ignore_permissions=True)
-
-@frappe.whitelist()
-def raise_query(data):
-    Query = frappe.get_doc({
-                "doctype": "Issue",
-                "subject":data['order'],
-                "issue_type":data['category'],
-                "priority":data['priority'],
-                "description":"Tracking No.:-" + data['tracking']+' '+"Complain/Remark:-"+ data['remarks']
-            })
-    Query.insert(ignore_permissions=True)
-
-@frappe.whitelist()
-def tracking_details(data):
-    existing_details = frappe.db.get_value("Tracking Details", {'order_id': data["value"]}, ['name'])
-    if existing_details:
-        details = frappe.get_doc("Tracking Details", existing_details)
-    else:
-        details = frappe.get_doc("Tracking Details", data["value"])
-    return details
-
 @frappe.whitelist()
 def on_create(self, method):
     customer = frappe.db.get_value("Customer", {'customer_name': self.full_name})
@@ -130,3 +94,27 @@ def on_create(self, method):
                 "phone":self.phone
             })
         profile.insert(ignore_permissions=True)
+
+@frappe.whitelist()
+def create_shipment(data):
+    Shipment = frappe.get_doc({
+                "doctype": "Create Shipment",
+                "originuae":data['origin_uae'],
+                "origin_city":data['origin_city'],
+                "destination":data['destination'],
+                "destination_pincode":data['destination_pincode'],
+                "destination_city":data['destination_city'],
+                "shipment_type":data['shipment_type'],
+                "total_pieces":data['total_pieces'],
+                "parcel_weight":data['weight'],
+            })
+    Shipment.insert(ignore_permissions=True)
+
+@frappe.whitelist()
+def tracking_details(data):
+    existing_details = frappe.db.get_value("Tracking Details", {'order_id': data["value"]}, ['name'])
+    if existing_details:
+        details = frappe.get_doc("Tracking Details", existing_details)
+    else:
+        details = frappe.get_doc("Tracking Details", data["value"])
+    return details

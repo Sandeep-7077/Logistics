@@ -1,6 +1,6 @@
 <template>
 <Header/>
-<div class="container py-5">
+<div class="container pb-5">
     <div class="text-center mb-5"> 
         <h1><b>Create Shipment</b></h1>
     </div>
@@ -8,60 +8,56 @@
     <div class="row">
     <div class="col-lg-12 mx-auto">
     <div class="bg-white rounded-lg shadow-lg p-5">
-        <!-- Credit card form tabs -->
         <ul role="tablist" class="nav bg-light nav-pills rounded-pill nav-fill mb-3">
             <li class="nav-item">
             <a href="#nav-tab-export" class="nav-link rounded-pill" @click="changeTab('nav-tab-export')" :class="{ 'active bg-danger': activeTab === 'nav-tab-export' , 'link-danger': activeTab === 'nav-tab-import' }">
-                <i class="fa fa-credit-card"></i> Export
+                Export
             </a>
             </li>
             <li class="nav-item">
             <a href="#nav-tab-import" class="nav-link rounded-pill" @click="changeTab('nav-tab-import')" :class="{ 'active bg-danger': activeTab === 'nav-tab-import', 'link-danger': activeTab === 'nav-tab-export' }">
-                <i class="fa fa-paypal"></i> Import
+                Import
             </a>
             </li>
         </ul>
-        <!-- End -->
-        <!-- Credit card form content -->
+        <!-- Export info-->
         <div class="tab-content">
-            <!-- credit card info-->
             <div id="nav-tab-export" class="tab-pane fade" :class="{ 'show active': activeTab === 'nav-tab-export' }">
-            <!-- ... (Credit Card tab content) ... -->
-            <form role="form">
+            <form @submit.prevent="getquote"> 
                 <div class="row">
                     <div class="col-sm-4">
-                    <div class="form-group mb-4">
-                        <label data-toggle="tooltip" title="Three-digits code on the back of your card">Origin(UAE Only)<i class="bi bi-asterisk" style="color:red;font-size: 7px;"></i></label>
-                        <input id="origin" type="text" required class="form-control" v-model="origin_uae"  @input="updateOrigin" >
+                        <div class="form-group mb-4">
+                            <label data-toggle="tooltip">Origin(UAE Only)<sup> <i class="bi bi-asterisk"></i></sup></label>
+                            <input id="origin" type="text" required class="form-control" v-model="origin_uae"  @input="updateOrigin" >
+                        </div>
                     </div>
+                    <div class="col-sm-4">
+                        <div class="form-group mb-4">
+                            <label data-toggle="tooltip"  >Origin City<sup> <i class="bi bi-asterisk"></i></sup></label>
+                            <input type="text" required class="form-control" v-model="origin_city">
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group mb-4">
+                            <label data-toggle="tooltip"  >Destination<sup> <i class="bi bi-asterisk"></i></sup></label>
+                            <input id="destination" type="text" required class="form-control" v-model="destination" @input="updateDestination">
+                        </div>
                     </div>
                     <div class="col-sm-4">
                     <div class="form-group mb-4">
-                        <label data-toggle="tooltip" title="Three-digits code on the back of your card">Origin City<i class="bi bi-asterisk" style="color:red;font-size: 7px;"></i></label>
-                        <input type="text" required class="form-control" v-model="origin_city">
-                    </div>
-                    </div>
-                    <div class="col-sm-4">
-                    <div class="form-group mb-4">
-                        <label data-toggle="tooltip" title="Three-digits code on the back of your card">Destination<i class="bi bi-asterisk" style="color:red;font-size: 7px;"></i></label>
-                        <input id="destination" type="text" required class="form-control" v-model="destination" @input="updateDestination">
-                    </div>
-                    </div>
-                    <div class="col-sm-4">
-                    <div class="form-group mb-4">
-                        <label data-toggle="tooltip" title="Three-digits code on the back of your card">Destination Pincode<i class="bi bi-asterisk" style="color:red;font-size: 7px;"></i></label>
+                        <label data-toggle="tooltip"  >Destination Pincode<sup> <i class="bi bi-asterisk"></i></sup></label>
                         <input type="text" required class="form-control" v-model="destination_pincode">
                     </div>
                     </div>
                     <div class="col-sm-4">
                     <div class="form-group mb-4">
-                        <label data-toggle="tooltip" title="Three-digits code on the back of your card">Destination City<i class="bi bi-asterisk" style="color:red;font-size: 7px;"></i></label>
+                        <label data-toggle="tooltip"  >Destination City<sup> <i class="bi bi-asterisk"></i></sup></label>
                         <input type="text" required class="form-control" v-model="destination_city">
                     </div>
                     </div>
                     <div class="col-sm-4">
                     <div class="form-group mb-4">
-                        <label data-toggle="tooltip" title="Three-digits code on the back of your card">Shipment Type<i class="bi bi-asterisk" style="color:red;font-size: 7px;"></i></label>
+                        <label data-toggle="tooltip"  >Shipment Type<sup> <i class="bi bi-asterisk"></i></sup></label>
                         <div class="select-wrapper">
                             <select required class="form-control" v-model="shipment_type">
                                 <option value="">Select</option>
@@ -74,63 +70,94 @@
                     </div>
                     <div class="col-sm-4">
                     <div class="form-group mb-4">
-                        <label data-toggle="tooltip" title="Three-digits code on the back of your card">Total Pieces<i class="bi bi-asterisk" style="color:red;font-size: 7px;"></i></label>
-                        <input type="text" required class="form-control" v-model="total_pieces">
+                        <label data-toggle="tooltip"  >Total Pieces<sup> <i class="bi bi-asterisk"></i></sup></label>
+                        <input type="text" required class="form-control" v-model="total_pieces" @input="createRows">
                     </div>
                     </div>
                     <div class="col-sm-4">
                     <div class="form-group mb-4">
-                        <label data-toggle="tooltip" title="Three-digits code on the back of your card">Parcel Weight in Kg<i class="bi bi-asterisk" style="color:red;font-size: 7px;"></i></label>
+                        <label data-toggle="tooltip"  >Parcel Weight in Kg<sup> <i class="bi bi-asterisk"></i></sup></label>
                         <input type="text" required class="form-control" v-model="weight">
                     </div>
                     </div>
                 </div>
+                <div class="col-md-10" v-if="showTable">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Weight(KGS)<sup> <i class="bi bi-asterisk"></i></sup></th>
+                                <th>Length(CM)<sup> <i class="bi bi-asterisk"></i></sup></th>
+                                <th>Width(CM)<sup> <i class="bi bi-asterisk"></i></sup></th>
+                                <th>Height(CM)<sup> <i class="bi bi-asterisk"></i></sup></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="index in total_pieces" :key="index">
+                                <td><input type="text" required class="form-control mb-1" ></td>
+                                <td><input type="text" required class="form-control mb-1" ></td>
+                                <td><input type="text" required class="form-control mb-1" ></td>
+                                <td><input type="text" required class="form-control mb-1" ></td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr style="font-size: 14px;">
+                                <td>Acutal Weight: 25.000 KG</td>
+                                <td colspan="2">Volumetric Weight(L*W*H/5000): 2.433 KG</td>
+                                <td>Charged Weight: 25.000 KG</td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" style="font-size: 14px; color: red;">Please note Invoice will be raised on Actual or Volumetric Weight, which is higher.</td> 
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
                 <div class="text-center"> 
-                    <button type="button" v-on:click="getquote()" class="subscribe btn btn-danger col-4 rounded-pill shadow-sm"> GET QUOTE  </button>
+                    <!-- <button type="submit" class="subscribe btn btn-danger col-4 rounded-pill shadow-sm"> GET QUOTE  </button> -->
+                    <router-link :to="`/select_carrier`" type="button" class="subscribe btn btn-danger col-4 rounded-pill shadow-sm"> GET QUOTE </router-link>
                 </div>
             </form>
             </div>
             <!-- End -->
-            <!-- credit card info-->
+            <!-- Import info-->
             <div id="nav-tab-import" class="tab-pane fade" :class="{ 'show active': activeTab === 'nav-tab-import' }">
             <!-- ... (Credit Card tab content) ... -->
             <form role="form">
                 <div class="row">
                     <div class="col-sm-4">
                     <div class="form-group mb-4">
-                        <label data-toggle="tooltip" title="Three-digits code on the back of your card">Origin(UAE Only)<i class="bi bi-asterisk" style="color:red;font-size: 7px;"></i></label>
+                        <label data-toggle="tooltip"  >Origin(UAE Only)<sup> <i class="bi bi-asterisk"></i></sup></label>
                         <input type="text" required class="form-control" v-model="origin_uae" >
                         <!-- <input type="text" required class="form-control" v-model="origin_uae" @input="searchPlace('origin')"> -->
                     </div>
                     </div>
                     <div class="col-sm-4">
                     <div class="form-group mb-4">
-                        <label data-toggle="tooltip" title="Three-digits code on the back of your card">Origin City<i class="bi bi-asterisk" style="color:red;font-size: 7px;"></i></label>
+                        <label data-toggle="tooltip"  >Origin City<sup> <i class="bi bi-asterisk"></i></sup></label>
                         <input type="text" required class="form-control" v-model="origin_city">
                     </div>
                     </div>
                     <div class="col-sm-4">
                     <div class="form-group mb-4">
-                        <label data-toggle="tooltip" title="Three-digits code on the back of your card">Destination<i class="bi bi-asterisk" style="color:red;font-size: 7px;"></i></label>
+                        <label data-toggle="tooltip"  >Destination<sup> <i class="bi bi-asterisk"></i></sup></label>
                         <input type="text" required class="form-control" v-model="destination">
                         <!-- <input type="text" required class="form-control" v-model="destination" @input="searchPlace('destination')"> -->
                     </div>
                     </div>
                     <div class="col-sm-4">
                     <div class="form-group mb-4">
-                        <label data-toggle="tooltip" title="Three-digits code on the back of your card">Destination Pincode<i class="bi bi-asterisk" style="color:red;font-size: 7px;"></i></label>
+                        <label data-toggle="tooltip"  >Destination Pincode<sup> <i class="bi bi-asterisk"></i></sup></label>
                         <input type="text" required class="form-control" v-model="destination_pincode">
                     </div>
                     </div>
                     <div class="col-sm-4">
                     <div class="form-group mb-4">
-                        <label data-toggle="tooltip" title="Three-digits code on the back of your card">Destination City<i class="bi bi-asterisk" style="color:red;font-size: 7px;"></i></label>
+                        <label data-toggle="tooltip"  >Destination City<sup> <i class="bi bi-asterisk"></i></sup></label>
                         <input type="text" required class="form-control" v-model="destination_city">
                     </div>
                     </div>
                     <div class="col-sm-4">
                     <div class="form-group mb-4">
-                        <label data-toggle="tooltip" title="Three-digits code on the back of your card">Shipment Type<i class="bi bi-asterisk" style="color:red;font-size: 7px;"></i></label>
+                        <label data-toggle="tooltip"  >Shipment Type<sup> <i class="bi bi-asterisk"></i></sup></label>
                         <div class="select-wrapper">
                             <select required class="form-control" v-model="shipment_type">
                                 <option value="">Select</option>
@@ -149,8 +176,6 @@
             </div>
             <!-- End -->
         </div>
-        <!-- End -->
-
     </div>
     </div>
     </div>
@@ -175,9 +200,10 @@ export default {
         destination_pincode: "",
         destination_city: "",
         shipment_type: "",
-        total_pieces: "",
+        total_pieces: 0,
         weight: "",
         activeTab: "nav-tab-export",
+        showTable: false,
         };
     },
     methods: {
@@ -244,6 +270,16 @@ export default {
                 }
             });
         },
+        createRows() {
+            const num = parseInt(this.total_pieces);
+            if (Number.isInteger(num) && num >= 0) {
+                this.showTable = true;
+                this.total_pieces = num;
+            } else {
+                this.showTable = false;
+                this.total_pieces = 0;
+            }
+        },
         async getquote() {
             const values = {
                 origin_uae: this.origin_uae,
@@ -256,19 +292,18 @@ export default {
                 weight: this.weight,
             };
             const key = this.$cookies.get("sid");
-            const response = await axios.post(
-                "/api/method/logistics.api.create_shipment",
-                { data: values },
-                {
+            const response = await axios
+            .post("/api/method/logistics.api.create_shipment",{ data: values },{
                 headers: {
                     Authorization: "token" + key,
-                },
-                }
-            );
-            if (response.status == 200) {
+                }})
+            .then((response) => {
                 this.$router.push({ name: "Home" });
-            }
-            },
+            })
+            .catch((response) => { 
+                alert("Values not entered properly");
+            })
+        },
         changeTab(tabId) {
             this.activeTab = tabId;
         },
@@ -279,3 +314,14 @@ export default {
     },
 };
 </script>
+<style>
+th {
+    background: none;
+    color: black;
+    font-weight: bold;
+    cursor: none;
+}
+tr:nth-of-type(2n+1) {
+    background: none !important;
+}
+</style>

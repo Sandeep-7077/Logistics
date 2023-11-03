@@ -45,8 +45,8 @@
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                     <div class="form-group">
-                        <label for="website">Address</label>
-                        <input type="url" class="form-control" id="website" v-model="profileDetails.address" placeholder="Address">
+                        <label for="Address">Address</label>
+                        <input type="text" class="form-control" id="website" v-model="profileDetails.address" placeholder="Address">
                     </div>
                 </div>
             </div>

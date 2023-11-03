@@ -4,7 +4,7 @@
         <div class="row">
         <div class="col-lg-3 col-md-3 col-sm-5 col-12">
             <a href="/">
-            <img src="/src/assets/images/onex_logo.jpeg" style="width:100px; margin-left: 72px; margin-top: 12px;" alt="OneX – Courier Services">
+            <img src="/src/assets/images/one-x-logo2.png" style="width:300px; margin-left: 72px; margin-top: 10px;" alt="OneX – Courier Services">
             </a>
         </div>
         <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
@@ -28,7 +28,7 @@
             </ul>
         </div>
         <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
-            <div class="navbar-collapse" id="navbar-list-4" style="margin-top: 60px">
+            <div class="navbar-collapse" id="navbar-list-4" style="margin-top: 35px">
             <ul class="navbar-nav">
                 <li class="nav-item dropbtn">
                 <div class="dropdown">

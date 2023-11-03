@@ -2,18 +2,18 @@
     <Header />
     <div class="container pb-5">
         <div class="text-center mb-5"> 
-                <h1><b>Shipment Tracking</b></h1>
+                <h1><b>Cancel Shipment</b></h1>
         </div>
         <div class="container rounded-lg shadow-lg p-5">
             <form @submit.prevent="fetchDetails"> 
                 <div class="row mb-3">
-                    <label for="inputEmail3" class="col-sm-3 col-form-label">Track Your Shipment</label>
+                    <label for="inputEmail3" class="col-sm-3 col-form-label">Search Your Shipment</label>
                     <div class="col-sm-9">
                     <input type="text" required class="form-control" id="inputEmail3" placeholder="Enter Tracking no. /Order No." v-model="tracking">
                     </div>
                 </div>
                 <div class="text-center"> 
-                    <button type="submit" class="btn btn-danger col-4 rounded-pill ">TRACK NOW</button>
+                    <button type="submit" class="btn btn-success col-4 rounded-pill ">Search</button>
                 </div>
             </form>
         </div>
